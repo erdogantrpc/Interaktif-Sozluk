@@ -1,0 +1,6 @@
+framework module Pods_InteraktifSozluk {
+  umbrella header "Pods-InteraktifSozluk-umbrella.h"
+
+  export *
+  module * { export * }
+}

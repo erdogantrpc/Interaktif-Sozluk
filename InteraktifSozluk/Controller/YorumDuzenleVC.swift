@@ -6,24 +6,36 @@
 //
 
 import UIKit
+import Firebase
 
 class YorumDuzenleVC: UIViewController {
 
+    @IBOutlet weak var txtYorum: UITextView!
+    @IBOutlet weak var btnGuncelle: UIButton!
+    
+    var yorumVerisi : (secilenYorum : Yorum, secilenFikir : Fikir)!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        txtYorum.layer.cornerRadius = 10
+        btnGuncelle.layer.cornerRadius = 10
+        
+        txtYorum.text = yorumVerisi.secilenYorum.yorumText!
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func btnGuncellePressed(_ sender: Any) {
+        guard let yorumText = txtYorum.text, txtYorum.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty != true else {return}
+        
+        Firestore.firestore().collection(Fikirler_REF)
+            .document(yorumVerisi.secilenFikir.documentId)
+            .collection(YORUMLAR_REF)
+            .document(yorumVerisi.secilenYorum.documentId)
+            .updateData([YORUM_TEXT : yorumText]) { (hata) in
+                if let hata = hata {
+                    debugPrint("Yorum güncellenirken bir hata meydana geldi : \(hata.localizedDescription)")
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
     }
-    */
-
 }
