@@ -5,8 +5,9 @@ Uygulamada şu ana unsurlar kullanılmıştır :
 - [Firebase](https://firebase.google.com) Framework
 - MVC Mimarisi
 - Extensions
-- Navigation controller
-- Table view controller
+- Navigation Controller
+- TableView Controller
+- TableView Cell
 
 # Intro
 <img src="intro.gif" width="800" height="500"/>
